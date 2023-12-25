@@ -136,4 +136,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Get all todos for a specific user
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Validate input
+    if (!userId) {
+      return res.status(400).json({ error: REQUEST_INPUT_GENERAL_VALIDATION_ERROR_MESSAGE });
+    }
+
+    const todos = await Todo.find({ userId: userId });
+
+    res.json(todos.map(todo => formatTodoResponse(todo)));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: GENERAL_SERVER_ERROR_MESSAGE });
+  }
+});
+
 export default router;
