@@ -1,8 +1,7 @@
-// src/server.ts
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import cors from 'cors'; // Import the cors middleware
+import cors from 'cors';
 import todoRoutes from './routes/todo';
 import config from './config';
 
@@ -11,7 +10,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-// Apply CORS middleware
 app.use(cors());
 
 mongoose.connect(config.MONGODB_URI);
